@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Subhajit Mondal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="theme-color" content="#0d1117">
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; margin: 0; padding: 0; cursor: none; }
+        
+        /* Custom Cursor Styles */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+            box-shadow: 0 0 10px #6366f1, 0 0 20px #6366f1, 0 0 30px #6366f1;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: #6366f1;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.2s ease;
+        }
+        
+        /* Hide default cursor */
+        * {
+            cursor: none !important;
+        }
+        
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .custom-cursor,
+            .cursor-trail {
+                display: none;
+            }
+            
+            * {
+                cursor: auto !important;
+            }
+            
+            body {
+                cursor: auto !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#0d1117] text-white min-h-screen flex items-center justify-center">
+    <div class="container mx-auto max-w-2xl px-4 text-center">
+        <div class="glass-effect p-12 rounded-lg">
+            <!-- Success Icon -->
+            <div class="w-20 h-20 bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] rounded-full flex items-center justify-center mx-auto mb-8">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            
+            <!-- Thank You Message -->
+            <h1 class="text-4xl font-bold text-white mb-4">Thank You!</h1>
+            <p class="text-xl text-slate-300 mb-6">Your message has been successfully sent.</p>
+            <p class="text-slate-400 mb-8">I'll get back to you as soon as possible at the email address you provided.</p>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="flex items-center justify-center gap-2 py-3 px-6 rounded-md bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-bold hover:opacity-90 transition-opacity">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back to Portfolio
+                </a>
+                <a href="mailto:subhajitm1560@gmail.com" class="flex items-center justify-center gap-2 py-3 px-6 rounded-md border-2 border-[#6366f1] text-[#6366f1] font-bold hover:bg-[#6366f1] hover:text-white transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Direct Email
+                </a>
+            </div>
+            
+            <!-- Auto-redirect notice -->
+            <p class="text-sm text-slate-500 mt-8">
+                You'll be automatically redirected to the portfolio in <span id="countdown">10</span> seconds.
+            </p>
+        </div>
+    </div>
+
+    <!-- Auto-redirect script -->
+    <script>
+        // Custom cursor initialization
+        function initCustomCursor() {
+            // Check if on mobile device
+            if (window.innerWidth <= 768) return;
+            
+            // Create main cursor
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+
+            // Create cursor trail elements
+            const trailElements = [];
+            for (let i = 0; i < 6; i++) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.opacity = (6 - i) / 8;
+                trail.style.transform = `translate(-50%, -50%) scale(${(6 - i) / 8})`;
+                document.body.appendChild(trail);
+                trailElements.push(trail);
+            }
+
+            // Mouse position tracking
+            let mouseX = 0;
+            let mouseY = 0;
+            let cursorX = 0;
+            let cursorY = 0;
+
+            // Update mouse position
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Smooth cursor animation
+            function animateCursor() {
+                // Smooth cursor movement
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+
+                // Update trail elements with delay
+                trailElements.forEach((trail, index) => {
+                    const delay = (index + 1) * 0.05;
+                    const trailX = cursorX - (mouseX - cursorX) * delay;
+                    const trailY = cursorY - (mouseY - cursorY) * delay;
+                    
+                    trail.style.left = trailX + 'px';
+                    trail.style.top = trailY + 'px';
+                });
+
+                requestAnimationFrame(animateCursor);
+            }
+
+            animateCursor();
+
+            // Enhanced hover effects for buttons
+            const hoverElements = document.querySelectorAll('a, button');
+            
+            hoverElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.style.width = '35px';
+                    cursor.style.height = '35px';
+                    cursor.style.background = 'linear-gradient(45deg, #6366f1, #8b5cf6, #06b6d4)';
+                    cursor.style.boxShadow = `
+                        0 0 15px #6366f1,
+                        0 0 25px #6366f1,
+                        0 0 35px #6366f1
+                    `;
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                    cursor.style.background = 'linear-gradient(45deg, #6366f1, #8b5cf6)';
+                    cursor.style.boxShadow = `
+                        0 0 10px #6366f1,
+                        0 0 20px #6366f1,
+                        0 0 30px #6366f1
+                    `;
+                });
+            });
+
+            // Click effect
+            document.addEventListener('click', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.boxShadow = `
+                    0 0 20px #6366f1,
+                    0 0 40px #6366f1,
+                    0 0 60px #6366f1
+                `;
+                
+                setTimeout(() => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.boxShadow = `
+                        0 0 10px #6366f1,
+                        0 0 20px #6366f1,
+                        0 0 30px #6366f1
+                    `;
+                }, 150);
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                trailElements.forEach(trail => {
+                    trail.style.opacity = '0';
+                });
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                trailElements.forEach((trail, index) => {
+                    trail.style.opacity = (6 - index) / 8;
+                });
+            });
+        }
+
+        // Initialize custom cursor when page loads
+        document.addEventListener('DOMContentLoaded', initCustomCursor);
+        
+        // Countdown and redirect functionality
+        let countdown = 10;
+        const countdownElement = document.getElementById('countdown');
+        
+        const interval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+        
+        // Allow user to cancel auto-redirect by interacting with the page
+        document.addEventListener('click', () => {
+            clearInterval(interval);
+            countdownElement.parentElement.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
