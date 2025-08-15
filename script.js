@@ -347,22 +347,28 @@ function initializeTimelineProjects() {
     // --- Project Data ---
     const projects = [
         {
-            title: "Skin Cancer Detection Model",
-            description: "Developing a skin cancer detection model using an Attention Mechanism to apply AI in healthcare.",
-            tech: ["Python", "TensorFlow", "Keras", "AI/ML"],
+            title: "Resume Builder",
+            description: "Interactive resume builder application allowing users to create professional resumes with real-time preview and download functionality.",
+            tech: ["HTML", "CSS", "JavaScript", "PDF Generation"],
             link: "#"
+        },
+        {
+            title: "Weather Application",
+            description: "Dynamic weather app providing real-time weather information with location-based forecasts and interactive UI elements.",
+            tech: ["HTML", "CSS", "JavaScript", "Weather API"],
+            link: "https://github.com/subhajit1560/Weather-Application"
         },
         {
             title: "Flappy Bird Clone",
             description: "A recreation of the classic Flappy Bird game, built with vanilla JavaScript.",
             tech: ["HTML", "CSS", "JavaScript", "Canvas"],
-            link: "#"
+            link: "https://github.com/subhajit1560/Flappy-Bird"
         },
         {
             title: "Red Store",
             description: "A complete e-commerce website with product catalog, shopping cart, and responsive design.",
             tech: ["HTML", "CSS", "JavaScript"],
-            link: "#"
+            link: "https://github.com/subhajit1560/E-Commerce-Website-Red-Store-"
         }
     ];
 
@@ -384,7 +390,7 @@ function initializeTimelineProjects() {
                     </div>
                     <p class="text-slate-400 mb-4">${project.description}</p>
                     <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#6366f1] hover:underline">
-                        View Project &gt;_
+                        Github
                     </a>
                 </div>
             </div>
