@@ -293,10 +293,10 @@ Contributions are welcome! Please follow these steps:
 ## 📞 Contact
 
 **Subhajit Mondal**
-- 📧 Email: [your-email@example.com]
-- 💼 LinkedIn: [linkedin.com/in/yourprofile]
+- 📧 Email: [subhajitm1560@gmail.com]
+- 💼 LinkedIn: [inkedin.com/in/thesubhajitmondal]
 - 🐙 GitHub: [github.com/subhajit1560]
-- 🌐 Portfolio: [your-portfolio-url.com]
+- 🌐 Portfolio: [https://subhajit1560.github.io/Portfolio/]
 
 ## 📄 License
 
