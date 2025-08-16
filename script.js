@@ -141,8 +141,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth navigation with active state
+    // Smooth navigation with active state and scroll detection
     const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    
+    // Function to update active navigation link based on scroll position
+    function updateActiveNavLink() {
+        let currentSection = '';
+        const scrollPosition = window.pageYOffset + 100; // Offset for navbar height
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        // Update active state for navigation links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Add scroll event listener for real-time navigation updates
+    window.addEventListener('scroll', updateActiveNavLink);
+    
+    // Initial call to set active state on page load
+    updateActiveNavLink();
+    
+    // Handle navigation link clicks
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -155,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     block: 'start'
                 });
                 
-                // Update active state
+                // Update active state immediately
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
             }
